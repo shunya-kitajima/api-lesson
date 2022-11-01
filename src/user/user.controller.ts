@@ -9,4 +9,9 @@ import { UpdateUserDto } from './dto/Update-user.dto';
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
+
+  @Get()
+  getLoginUser(@Req() req: Request): Omit<User, 'hashedPassword'> {
+    return req.user;
+  }
 }
