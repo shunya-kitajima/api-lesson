@@ -5,5 +5,8 @@ import { Request } from 'express';
 import { UserService } from './user.service';
 import { UpdateUserDto } from './dto/Update-user.dto';
 
+@UseGuards(AuthGuard('jwt'))
 @Controller('user')
-export class UserController {}
+export class UserController {
+  constructor(private readonly userService: UserService) {}
+}
