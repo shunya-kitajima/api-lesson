@@ -14,7 +14,7 @@ export class AuthService {
     private readonly jwt: JwtService,
     private readonly prisma: PrismaService,
   ) {}
-  signup = async (dto: AuthDto): Promise<Msg> => {
+  async signup(dto: AuthDto): Promise<Msg> {
     const hashed = await bcrypt.hash(dto.password, 12);
     try {
       await this.prisma.user.create({
@@ -34,8 +34,8 @@ export class AuthService {
       }
       throw error;
     }
-  };
-  generateJwt = async (userId: number, email: string): Promise<Jwt> => {
+  }
+  async generateJwt(userId: number, email: string): Promise<Jwt> {
     const payload = {
       sub: userId,
       email,
@@ -48,8 +48,8 @@ export class AuthService {
     return {
       accessToken: token,
     };
-  };
-  login = async (dto: AuthDto): Promise<Jwt> => {
+  }
+  async login(dto: AuthDto): Promise<Jwt> {
     const user = await this.prisma.user.findUnique({
       where: {
         email: dto.email,
@@ -59,5 +59,5 @@ export class AuthService {
     const isValid = await bcrypt.compare(dto.password, user.hasedPassword);
     if (!isValid) throw new ForbiddenException('Email or password incorrect');
     return this.generateJwt(user.id, user.email);
-  };
+  }
 }
