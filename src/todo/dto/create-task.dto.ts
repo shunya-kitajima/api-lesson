@@ -1,7 +1,7 @@
 import { IsEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateTaskDto {
-  @IsEmpty()
+  @IsNotEmpty()
   @IsString()
   title: string;
 
