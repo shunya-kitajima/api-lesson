@@ -11,7 +11,7 @@ export class TodoService {
   getTasks(userId: number): Promise<Task[]> {
     return this.prisma.task.findMany({
       where: {
-        userId: userId,
+        userId,
       },
       orderBy: {
         createdAt: 'desc',
@@ -23,7 +23,7 @@ export class TodoService {
     return this.prisma.task.findFirst({
       where: {
         id: taskId,
-        userId: userId,
+        userId,
       },
     });
   }
