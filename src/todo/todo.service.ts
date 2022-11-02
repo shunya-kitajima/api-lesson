@@ -49,7 +49,7 @@ export class TodoService {
       },
     });
     if (!task || task.userId !== userId)
-      throw new ForbiddenException('No permision to update');
+      throw new ForbiddenException('No permission to update');
     return this.prisma.task.update({
       where: {
         id: taskId,
@@ -67,7 +67,7 @@ export class TodoService {
       },
     });
     if (!task || task.userId !== userId)
-      throw new ForbiddenException('No permision to delete');
+      throw new ForbiddenException('No permission to delete');
     await this.prisma.task.delete({
       where: {
         id: taskId,
