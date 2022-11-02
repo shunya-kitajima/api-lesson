@@ -37,4 +37,26 @@ export class TodoService {
     });
     return task;
   }
+
+  async updateTask(
+    userId: number,
+    taskId: number,
+    dto: UpdateTaskDto,
+  ): Promise<Task> {
+    const task = await this.prisma.task.findUnique({
+      where: {
+        id: taskId,
+      },
+    });
+    if (!task || task.userId !== userId)
+      throw new ForbiddenException('No permision to update');
+    return this.prisma.task.update({
+      where: {
+        id: taskId,
+      },
+      data: {
+        ...dto,
+      },
+    });
+  }
 }
