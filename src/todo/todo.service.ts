@@ -19,6 +19,15 @@ export class TodoService {
     });
   }
 
+  getTaskById(userId: number, taskId: number): Promise<Task> {
+    return this.prisma.task.findFirst({
+      where: {
+        id: taskId,
+        userId: userId,
+      },
+    });
+  }
+
   async createTask(dto: CreateTaskDto) {
     await this.prisma.task.create(dto);
   }
