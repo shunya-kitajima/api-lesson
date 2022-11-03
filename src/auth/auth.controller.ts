@@ -37,7 +37,7 @@ export class AuthController {
     res.cookie('access_token', jwt.accessToken, {
       httpOnly: true,
       secure: true,
-      sameSite: true,
+      sameSite: 'none',
       path: '/',
     });
     return {
