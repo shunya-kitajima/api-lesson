@@ -10,7 +10,7 @@ const bootstrap = async () => {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.enableCors({
     credentials: true,
-    origin: ['http://localhost:3000'],
+    origin: ['http://localhost:3000', 'https://todo-nextjs-green.vercel.app'],
   });
   app.use(cookieParser());
   app.use(
